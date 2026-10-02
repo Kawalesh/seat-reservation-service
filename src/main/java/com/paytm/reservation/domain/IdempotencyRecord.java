@@ -31,7 +31,6 @@ public class IdempotencyRecord {
     @Column(name = "reservation_id", nullable = false, length = 64)
     private String reservationId;
 
-    @Lob
     @Column(name = "response_payload", nullable = false, columnDefinition = "TEXT")
     private String responsePayload;
 

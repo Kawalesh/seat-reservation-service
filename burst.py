@@ -17,6 +17,13 @@ import urllib.error
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import Counter
 
+# Ensure terminal stdout handles UTF-8 on Windows cp1252 consoles
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 DEFAULT_BASE_URL = "http://localhost:8080"
 
 def make_request(method, url, data=None, token=None, headers=None):
