@@ -25,9 +25,9 @@ COPY --from=builder /build/target/seat-reservation-service-*.jar /app/app.jar
 EXPOSE 8080
 
 ENV PORT=8080
-ENV JAVA_OPTS="-XX:+UseZGC -XX:+ZGenerational -Xmx512m -Xms256m"
+ENV JAVA_OPTS="-XX:+UseSerialGC -Xmx256m -Xms128m -XX:MaxMetaspaceSize=96m -XX:+ExitOnOutOfMemoryError"
 
 HEALTHCHECK --interval=10s --timeout=5s --start-period=15s --retries=3 \
-  CMD wget -qO- http://localhost:8080/health/ready || exit 1
+  CMD wget -qO- http://localhost:${PORT:-8080}/health/ready || exit 1
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
