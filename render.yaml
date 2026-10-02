@@ -25,6 +25,6 @@ services:
 databases:
   - name: seat-reservation-db
     databaseName: seat_reservation
-    user: postgres
+    user: seat_reservation_user
     plan: free
     region: oregon
